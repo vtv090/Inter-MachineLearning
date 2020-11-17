@@ -1,6 +1,6 @@
 
-
-
+#Print A Graph as List
+#Author: Trung Vo | vtvo90@outlook.com
 class AdjNode:
     def __init__(self, value):
         self.vertex = value
@@ -19,6 +19,7 @@ class Graph:
         node = AdjNode(src)
         node.next = self.graph[des]
         self.graph[des] = node
+
 
     def printGraph(self):
         for i in range(self.V):
