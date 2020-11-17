@@ -1,6 +1,4 @@
-# Python Program to check whether  
-# a graph is tree or not 
-  
+
 from collections import defaultdict 
   
 class Graph(): 
@@ -14,10 +12,7 @@ class Graph():
         self.graph[v].append(w)  
         # Add v to w list. 
         self.graph[w].append(v)  
-  
-    # A recursive function that uses visited[]  
-    # and parent to detect cycle in subgraph  
-    # reachable from vertex v. 
+
     def isCyclicUtil(self, v, visited, parent): 
   
         # Mark current node as visited 
@@ -40,30 +35,19 @@ class Graph():
   
         return False
   
-    # Returns true if the graph is a tree,  
-    # else false. 
     def isTree(self): 
-        # Mark all the vertices as not visited  
-        # and not part of recursion stack 
+
         visited = [False] * self.V 
-  
-        # The call to isCyclicUtil serves multiple  
-        # purposes. It returns true if graph reachable  
-        # from vertex 0 is cyclcic. It also marks  
-        # all vertices reachable from 0. 
+ 
         if self.isCyclicUtil(0, visited, -1) == True: 
             return False
   
-        # If we find a vertex which is not reachable 
-        # from 0 (not marked by isCyclicUtil(),  
-        # then we return false 
         for i in range(self.V): 
             if visited[i] == False: 
                 return False
   
         return True
   
-# Driver program to test above functions 
 g1 = Graph(5) 
 g1.addEdge(1, 0) 
 g1.addEdge(0, 2) 
