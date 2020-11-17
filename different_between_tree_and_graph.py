@@ -1,48 +1,39 @@
+# Python Program to check whether a graph is tree or not 
+# Author: Trung Vo | vtvo90@outlook.com
 
-from collections import defaultdict 
+class Graph: 
   
-class Graph(): 
-  
-    def __init__(self, V): 
-        self.V = V 
-        self.adj  = defaultdict(list) 
-  
-    def addEdge(self, v, w): 
-        # Add w to v ist. 
-        self.graph[v].append(w)  
-        # Add v to w list. 
-        self.graph[w].append(v)  
+    def __init__(self, size): 
+        self.size = size
+        #self.adj  = defaultdict(list)
+        self.adj = [[] for i in range(size)]
 
-    def isCyclicUtil(self, v, visited, parent): 
+    
+    #add Edges for undirected Graph
+    def addEdge(self, src, des): 
+        self.adj[src].append(des)  
+        self.adj[des].append(src)  
+
+    def isCyclicUtil(self, start, visited, parent): 
   
-        # Mark current node as visited 
-        visited[v] = True
-  
-        # Recur for all the vertices adjacent  
-        # for this vertex 
-        for i in self.graph[v]: 
-            # If an adjacent is not visited,  
-            # then recur for that adjacent 
+        visited[start] = True
+        for i in self.adj[start]: 
+
             if visited[i] == False: 
-                if self.isCyclicUtil(i, visited, v) == True: 
+                if self.isCyclicUtil(i, visited, start) == True: 
                     return True
-  
-            # If an adjacent is visited and not  
-            # parent of current vertex, then there  
-            # is a cycle. 
             elif i != parent: 
                 return True
   
         return False
   
-    def isTree(self): 
 
-        visited = [False] * self.V 
- 
+    def isTree(self): 
+        visited = [False] * self.size 
         if self.isCyclicUtil(0, visited, -1) == True: 
             return False
   
-        for i in range(self.V): 
+        for i in range(self.size): 
             if visited[i] == False: 
                 return False
   
