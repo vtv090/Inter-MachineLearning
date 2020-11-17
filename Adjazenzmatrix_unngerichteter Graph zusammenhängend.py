@@ -49,5 +49,4 @@ if __name__ == "__main__":
         
     if isconnected(matrix2, 6) == True:
         print("success for matrix 2")
- 
-# This code is contributed by Abhishek Valsan
+
