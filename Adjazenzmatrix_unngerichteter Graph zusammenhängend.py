@@ -1,69 +1,53 @@
 class Graph:
-     
-    # init function to declare class variables
     def __init__(self, numNodes):
         self.numNodes = numNodes
         self.adj = [[] for i in range(numNodes)]
- 
-    def DFSUtil(self, temp, v, visited):
- 
-        # Mark the current vertex as visited
-        visited[v] = True
- 
-        # Store the vertex to list
-        temp.append(v)
- 
-        # Repeat for all vertices adjacent
-        # to this vertex v
-        for i in self.adj[v]:
-            if visited[i] == False:
- 
-                # Update the list
-                temp = self.DFSUtil(temp, i, visited)
-        return temp
- 
-    # method to add an undirected edge
-    def addEdge(self, v, w):
-        self.adj[v].append(w)
-        self.adj[w].append(v)
- 
-    # Method to retrieve connected components
-    # in an undirected graph
-    def connectedComponents(self):
-        visited = []
-        cc = []
-        for i in range(self.numNodes):
-            visited.append(False)
-        for v in range(self.numNodes):
-            if visited[v] == False:
-                temp = []
-                cc.append(self.DFSUtil(temp, v, visited))
-        return cc
+    
+    def addEdge(self, src, des):
+        self.adj[src].append(des)
+        self.adj[des].append(src)
+    
+def DFS(self, start, visited):
 
-    def isconnected(self):
-        c1 = self.connectedComponents()
+    visited[start] = True
+    for i in self.adj[start]:
+        if not visited[i]:
+            DFS(self, i, visited)
 
-        if(c1 != self):
-            return False
-        else:
-            return True
-        return False
- 
- 
-# Driver Code
+def isconnected(self, nmNodes):
+    
+    for i in range(nmNodes):
+        visited = [False]*nmNodes
+        DFS(self, i, visited)
+        for b in visited:
+            if not b:
+                return False
+    return True
+
 if __name__ == "__main__":
- 
-    # Create a graph given in the above diagram
-    # 5 vertices numbered from 0 to 4
-    g = Graph(6)
-    g.addEdge(1, 0)
-    g.addEdge(0, 1)
-    g.addEdge(2, 3)
-    g.addEdge(3, 2)
-    g.addEdge(5, 2)
-    g.addEdge(2, 5)
-    cc = g.isconnected()
-    print("Following are connected components")
-    print(cc)
+
+    matrix1 = Graph(6)
+    matrix1.addEdge(0, 1)
+    matrix1.addEdge(1, 3)
+    matrix1.addEdge(1, 5)
+    matrix1.addEdge(3, 1)
+    matrix1.addEdge(5, 1)
+
+
+
+    matrix2 = Graph(6)
+    matrix2.addEdge(0, 1)
+    matrix2.addEdge(1, 3)
+    matrix2.addEdge(1, 5)
+    matrix2.addEdge(2, 3)
+    matrix2.addEdge(3, 5)
+    matrix2.addEdge(4, 5)
+    matrix2.addEdge(5, 0)
+
+    if isconnected(matrix1, 6) == False:
+        print("Success for matrix 1")
+        
+    if isconnected(matrix2, 6) == True:
+        print("success for matrix 2")
  
 # This code is contributed by Abhishek Valsan
